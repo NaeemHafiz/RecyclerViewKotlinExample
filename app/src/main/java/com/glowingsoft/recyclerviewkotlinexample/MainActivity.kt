@@ -1,13 +1,14 @@
 package com.glowingsoft.recyclerviewkotlinexample
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CustomAdapter.Callback {
 
 
     @SuppressLint("WrongConstant")
@@ -31,9 +32,14 @@ class MainActivity : AppCompatActivity() {
         users.add(User("Yashar Khan", "Ranchi Jharkhand"))
 
         //creating our adapter
-        val adapter = CustomAdapter(users)
+        val adapter = CustomAdapter(users, this)
 
         //now adding the adapter to recyclerview
         recyclerView.adapter = adapter
+    }
+
+    @SuppressLint("ShowToast")
+    override fun onItemClicked(pos: Int) {
+        Toast.makeText(this@MainActivity, "Its toast!" + " " + pos, Toast.LENGTH_SHORT).show()
     }
 }
